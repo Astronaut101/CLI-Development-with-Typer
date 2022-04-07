@@ -71,6 +71,7 @@
 
 ## Application Layout Structure
 
+
 to_do_cli/
 │
 ├── crtodo/
@@ -106,4 +107,39 @@ Options:
   --help                Show this message and exit.
 ```
 
-## [TBC] Setting up Initial CLI Tests with pytest
+## Setting up Initial CLI Tests with pytest
+
+* Typer class that suits well with testing CLI application -> CliRunner
+
+* *NOTE*: Always type in the flag 'py -m crtodo' in order to run your module
+
+```[python]
+(cli_to_do_dev) C:\Users\creyes24\Real-World-Python\CLI_projects\to_do_cli>py -m pytest --verbose tests/
+================================================= test session starts =================================================
+platform win32 -- Python 3.9.0, pytest-6.2.4, py-1.11.0, pluggy-0.13.1 -- C:\Users\creyes24\Real-World-Python\CLI_projects\to_do_cli\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\creyes24\Real-World-Python\CLI_projects\to_do_cli
+collected 1 item
+
+tests/test_crtodo.py::test_version PASSED                                                                        [100%]
+
+================================================== 1 passed in 0.07s ==================================================
+```
+
+## Preparing the To-Do Database for Use
+
+* Setting up the directory path for our configuration file to store our database data objects.
+* In order for our database to be ready for use, we need to setup two things:
+
+1. We need a way to retrieve the database file path from the application's configuration file.
+2. We need to initialize the database to hold JSON content.
+
+## Implementing the init CLI Command
+
+```[python]
+(cli_to_do_dev) C:\Users\creyes24\Real-World-Python\CLI_projects\to_do_cli>py -m crtodo init
+to-do database location? [C:\Users\creyes24\.creyes24_todo.json]: C:\Users\creyes24\Real-World-Python\CLI_projects\to_do_cli\._todo.json
+The to-do database is C:\Users\creyes24\Real-World-Python\CLI_projects\to_do_cli\._todo.json
+```
+
+## Setting up the To-Do App Back End
