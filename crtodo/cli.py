@@ -2,15 +2,19 @@
 # crtodo/cli.py
 
 from pathlib import Path
-from typing import Optional
+from typing import List, Optional
 
 import typer
 
-from crtodo import ERRORS, __app_name__, __version__, config, database
+from crtodo import (
+    ERRORS, __app_name__, __version__, config, database, crtodo
+)
 
-
+# ================== Initialize Library's functionalities
 app = typer.Typer()
 
+
+# ================== Function Definitions
 @app.command()
 def init(
     db_path: str = typer.Option(
@@ -38,7 +42,25 @@ def init(
     else:
         typer.secho(f"The to-do database is {db_path}", fg=typer.colors.GREEN)
     
-    
+
+def get_todoer() -> crtodo.Todoer:
+    if config.CONFIG_FILE_PATH.exists():
+        db_path = database.get_database_path(config.CONFIG_FILE_PATH)
+    else:
+        typer.secho(
+            'Config file not found. Please, run "crtodo init"',
+            fg=typer.colors.RED,
+        )
+        raise typer.Exit(1)
+    if db_path.exists():
+        return crtodo.Todoer(db_path)
+    else:
+        typer.secho(
+            'Database not found. Please, run "cptodo init"',
+            fg=typer.colors.RED,
+        )
+        raise typer.Exit(1)
+
 def _version_callback(value: bool) -> None:
     if value:
         typer.echo(f"{__app_name__} v{__version__}")
@@ -57,3 +79,4 @@ def main(
     )
 ) -> None:
     return
+

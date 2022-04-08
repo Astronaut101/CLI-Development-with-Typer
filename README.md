@@ -143,3 +143,139 @@ The to-do database is C:\Users\creyes24\Real-World-Python\CLI_projects\to_do_cli
 ```
 
 ## Setting up the To-Do App Back End
+
+* *Defining a Single To-Do*
+
+Our main components that is stored in our Single To-Do:
+
+1. Description: How do you describe this to-do?
+2. Priority: What priority does this to-do have over the rest of your to-dos?
+3. Done: Is this to-do done?
+
+Our sample To-Do data structure:
+
+```[json]
+todo = {
+  "Description": "Finish cooking bolognese",
+  "Priority": 4,
+  "Done": True,
+}
+```
+
+The *"Description"* key stores a string describing the current to-do. The *"Priority"* key can take three possible values: *1* for *high*, *2* for *medium*, and *3* for *low* priority. The *"Done"* key holds True when you've completed the to-do and False otherwise.
+
+* *Communicating with the CLI*
+
+1. *todo*: The dictionary holding the information for the current to-do
+2. *error*: The return or error code confirming if the current operation was successful or not.
+
+* For our To-Do model controller, we subclassed *NamedTuple* from the typing module as this allows us to create named tuples with type hints for their named fields.
+
+* *Communicate with the Database*
+
+1. *todo_list*: The to-do list you'll write to and read from the database
+2. *error*: An integer number representing a return code related to the current database operation.
+
+* *Write the Controller Class, Todoer*
+
+In order to connect our DatabaseHandler logic with our application's CLI, you'll write a class called Todoer. This class will be able to replicate the behaviour similarly to a controller in the Model-View-Controller pattern
+
+Our *Todoer* class uses the *__composition__* OOP design pattern, in which it has a DatabaseHandler component to facilitate direct communication with the to-do database.
+
+## Adding and Listing To-Dos Functionalities
+
+* *Define Unit Tests for Todoer.add()*
+
+On our add functionality of our To-Do CLI application, think of what *'.add()'* method really does:
+
+1. Get a to-do *description* and *priority*
+2. Create a dictionary to hold the *to-do information*
+3. Read the to-do list from the *database*
+4. Append the *new to-do* to the current to-do list
+5. Write the *updated to-do list* back to the database.
+6. Return the *newly added to-do* along with a return code back to the caller.
+
+* A common practice in TDD is to start with the main functionality of a given method or function. We will start by creating test cases to check if .add() properly adds new to-dos to the database.
+
+* To test .add(), we must be able to create a Todoer instance with a proper JSON file as the target database. In order to provide the file, we will use a pytest *fixture*
+
+### Sample test cases for the .add() functionality
+
+```[python]
+(cli_to_do_dev) C:\Users\creyes24\Real-World-Python\CLI_projects\to_do_cli>py -m pytest --verbose tests/
+================================================= test session starts =================================================
+platform win32 -- Python 3.9.0, pytest-6.2.4, py-1.11.0, pluggy-0.13.1 -- C:\Users\creyes24\Real-World-Python\CLI_projects\to_do_cli\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\creyes24\Real-World-Python\CLI_projects\to_do_cli
+collected 3 items
+
+tests/test_crtodo.py::test_version PASSED                                                                        [ 33%]
+tests/test_crtodo.py::test_add[description0-1-expected0] FAILED                                                  [ 66%]
+tests/test_crtodo.py::test_add[description1-2-expected1] FAILED                                                  [100%]
+
+====================================================== FAILURES =======================================================
+_________________________________________ test_add[description0-1-expected0] __________________________________________
+
+mock_json_file = WindowsPath('C:/Users/creyes24/AppData/Local/Temp/pytest-of-creyes24/pytest-0/test_add_description0_1_expect0/todo.json')
+description = ['get', 'some', 'coffee', 'kick', 'smoothie'], priority = 1
+expected = ({'Description': 'Get some Coffee Kick Smoothie.', 'Done': False, 'Priority': 1}, 0)
+
+    @pytest.mark.parametrize(
+        "description, priority, expected",
+        [
+            pytest.param(
+                test_data1["description"],
+                test_data1["priority"],
+                (test_data1["todo"], SUCCESS),
+            ),
+            pytest.param(
+                test_data2["description"],
+                test_data2["priority"],
+                (test_data2["todo"], SUCCESS),
+            ),
+        ],
+    )
+    def test_add(mock_json_file, description, priority, expected):
+        todoer = crtodo.Todoer(mock_json_file)
+>       assert todoer.add(description, priority) == expected
+E       AttributeError: 'Todoer' object has no attribute 'add'
+
+tests\test_crtodo.py:72: AttributeError
+_________________________________________ test_add[description1-2-expected1] __________________________________________
+
+mock_json_file = WindowsPath('C:/Users/creyes24/AppData/Local/Temp/pytest-of-creyes24/pytest-0/test_add_description1_2_expect0/todo.json')
+description = ['Wash the car'], priority = 2
+expected = ({'Description': 'Wash the car.', 'Done': False, 'Priority': 2}, 0)
+
+    @pytest.mark.parametrize(
+        "description, priority, expected",
+        [
+            pytest.param(
+                test_data1["description"],
+                test_data1["priority"],
+                (test_data1["todo"], SUCCESS),
+            ),
+            pytest.param(
+                test_data2["description"],
+                test_data2["priority"],
+                (test_data2["todo"], SUCCESS),
+            ),
+        ],
+    )
+    def test_add(mock_json_file, description, priority, expected):
+        todoer = crtodo.Todoer(mock_json_file)
+>       assert todoer.add(description, priority) == expected
+E       AttributeError: 'Todoer' object has no attribute 'add'
+
+tests\test_crtodo.py:72: AttributeError
+=============================================== short test summary info ===============================================
+FAILED tests/test_crtodo.py::test_add[description0-1-expected0] - AttributeError: 'Todoer' object has no attribute 'add'
+FAILED tests/test_crtodo.py::test_add[description1-2-expected1] - AttributeError: 'Todoer' object has no attribute 'add'
+============================================= 2 failed, 1 passed in 0.43s =============================================
+```
+
+## Implementing the add CLI Command
+
+* Every time the to-do application runs, it needs to be accessed from the Todoer class and connect the CLI with the database. To accomplish this requirement, we will create a __get_todoer()__ function.
+
+[TBC] - Completing the .add() functionality in our Todoer class

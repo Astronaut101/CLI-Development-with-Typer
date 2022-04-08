@@ -10,9 +10,13 @@ from crtodo import (
     DB_WRITE_ERROR, DIR_ERROR, FILE_ERROR, SUCCESS, __app_name__
 )
 
+
+# ====================== Initialize Path Variables
 CONFIG_DIR_PATH = Path(typer.get_app_dir(__app_name__))
 CONFIG_FILE_PATH = CONFIG_DIR_PATH / "config.ini"
 
+
+# ===================== Function Definitions
 def init_app(db_path: str) -> int:
     """Initialize the application."""
     config_code = _init_config_file()
@@ -23,7 +27,12 @@ def init_app(db_path: str) -> int:
         return database_code
     return SUCCESS
 
+
 def _init_config_file() -> int:
+    """NOTE: config.ini file is stored in the roaming directory
+    by default. Set the 'roaming' parameter to False under
+    'typer.get_app_dir(__your_appname__, roaming=False)' if you
+    want to store in your C://users//<user>//AppData//Local"""
     try:
         CONFIG_DIR_PATH.mkdir(exist_ok=True)
     except OSError:
@@ -33,6 +42,7 @@ def _init_config_file() -> int:
     except OSError:
         return FILE_ERROR
     return SUCCESS
+
 
 def _create_database(db_path: str) -> int:
     config_parser = configparser.ConfigParser()
