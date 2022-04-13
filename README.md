@@ -280,21 +280,21 @@ FAILED tests/test_crtodo.py::test_add[description1-2-expected1] - AttributeError
 
 ## Implementing the list Command
 
-![list the to-do items in cool blue font!](C:\Users\Clarence Vinzcent\Real-World-Python\Command-Line-Tool-Typer\images\typer_list_command.png "Typer CLI todo list table")
+![list the to-do items in cool blue font!](./images/typer_list_command.png "Typer CLI todo list table")
 
 ## Implementing the To-Do Completion Functionality
 
-![completing to-do items on our to-do list!](C:\Users\Clarence Vinzcent\Real-World-Python\Command-Line-Tool-Typer\images\typer_complete_command.png "Typer CLI complete todo list items")
+![completing to-do items on our to-do list!](./images/typer_complete_command.png "Typer CLI complete todo list items")
 
 ## Implementing the Remove To-Dos functionality
 
 ### Implementing the __remove__ CLI command
 
-![removing to-do items on our to-do list!]C:\Users\Clarence Vinzcent\Real-World-Python\Command-Line-Tool-Typer\images\typer_remove_command.png "Typer CLI remove todo list items")
+![removing to-do items on our to-do list!](./images/typer_remove_command.png "Typer CLI remove todo list items")
 
 ### Implementing the __clear__ CLI command
 
-![clearing all to-do items on our to-do list!](C:\Users\Clarence Vinzcent\Real-World-Python\Command-Line-Tool-Typer\images\typer_clear_command.png "Typer CLI clear todo list items")
+![clearing all to-do items on our to-do list!](./images/typer_clear_command.png "Typer CLI clear todo list items")
 
 ## Possible feature additions to the minimal To-Do CLI Application
 
