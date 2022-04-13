@@ -17,7 +17,7 @@ from crtodo import (
 
 # ======================= Initializing Test Data Variables
 test_data1 = {
-    "description": ["get", "some", "coffee", "kick", "smoothie"],
+    "description": ["Get", "some", "Coffee", "Kick", "Smoothie"],
     "priority": 1,
     "todo": {
         "Description": "Get some Coffee Kick Smoothie.",

@@ -278,4 +278,26 @@ FAILED tests/test_crtodo.py::test_add[description1-2-expected1] - AttributeError
 
 * Every time the to-do application runs, it needs to be accessed from the Todoer class and connect the CLI with the database. To accomplish this requirement, we will create a __get_todoer()__ function.
 
-[TBC] - Completing the .add() functionality in our Todoer class
+## Implementing the list Command
+
+![list the to-do items in cool blue font!](C:\Users\Clarence Vinzcent\Documents\ShareX\Screenshots\2022-04\typer_list_command.png "Typer CLI todo list table")
+
+## Implementing the To-Do Completion Functionality
+
+![completing to-do items on our to-do list!](C:\Users\Clarence Vinzcent\Documents\ShareX\Screenshots\2022-04\typer_complete_command.png "Typer CLI complete todo list items")
+
+## Implementing the Remove To-Dos functionality
+
+### Implementing the __remove__ CLI command
+
+![removing to-do items on our to-do list!](C:\Users\Clarence Vinzcent\Documents\ShareX\Screenshots\2022-04\typer_remove_command.png "Typer CLI remove todo list items")
+
+### Implementing the __clear__ CLI command
+
+![clearing all to-do items on our to-do list!](C:\Users\Clarence Vinzcent\Documents\ShareX\Screenshots\2022-04\typer_clear_command.png "Typer CLI clear todo list items")
+
+## Possible feature additions to the minimal To-Do CLI Application
+
+* *Add support for dates and deadlines*
+* *Write more unit tests*
+* *Packing the application and publishing it to PyPI*
